@@ -1,6 +1,6 @@
-# Chapter 4: Hardware Layer (Silicon & ASM) {#hardware_arch}
+# Chapter 3: Hardware Layer (Silicon & ASM) {#hardware_arch}
 
-[<< Previous Chapter: Requirements](requirements.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
+[<< Previous Chapter: Getting Started](getting_started.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
 
 ## VHDL Silicon Trigger
 The hardware layer (`hardware/vhdl/signal_trigger.vhd`) implements a simple signal trigger based on price jumps.
@@ -21,4 +21,4 @@ The `hardware/asm/simd_ops.cpp` file provides AVX-512 and AVX2 optimized normali
 
 ---
 
-[<< Previous Chapter: Requirements](requirements.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
+[<< Previous Chapter: Getting Started](getting_started.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)

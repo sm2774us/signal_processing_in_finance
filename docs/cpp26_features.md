@@ -1,4 +1,4 @@
-# Chapter 8: C++26 Modern Feature Deep-Dive {#cpp26_features}
+# Chapter 7: C++26 Modern Feature Deep-Dive {#cpp26_features}
 
 [<< Previous Chapter: Execution Layer](optimization.html) | [Back to Table of Contents](index.html) | [Next Chapter: Verification >>](verification.html)
 

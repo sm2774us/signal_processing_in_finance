@@ -1,4 +1,4 @@
-# Chapter 7: Execution Layer (Convex Optimization) {#optimization}
+# Chapter 6: Execution Layer (Convex Optimization) {#optimization}
 
 [<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: C++26 Features >>](cpp26_features.html)
 

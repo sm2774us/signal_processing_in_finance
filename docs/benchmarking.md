@@ -1,4 +1,4 @@
-# Chapter 10: Performance Benchmarking {#benchmarking}
+# Chapter 9: Performance Benchmarking {#benchmarking}
 
 [<< Previous Chapter: Verification](verification.html) | [Back to Table of Contents](index.html) | [Next Chapter: Citations >>](citations.html)
 

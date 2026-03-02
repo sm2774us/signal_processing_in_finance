@@ -1,4 +1,4 @@
-# Chapter 11: Citations & Research {#citations}
+# Chapter 10: Citations & Research {#citations}
 
 [<< Previous Chapter: Benchmarking](benchmarking.html) | [Back to Table of Contents](index.html)
 

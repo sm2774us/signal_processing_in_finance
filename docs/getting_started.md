@@ -1,6 +1,6 @@
 # Chapter 2: Getting Started & Build Instructions {#getting_started}
 
-[<< Previous Chapter: Introduction](introduction.html) | [Back to Table of Contents](index.html) | [Next Chapter: Requirements >>](requirements.html)
+[<< Previous Chapter: Introduction](introduction.html) | [Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)
 
 ---
 
@@ -42,4 +42,4 @@ docker run -it hft-stack /bin/bash
 
 ---
 
-[<< Previous Chapter: Introduction](introduction.html) | [Back to Table of Contents](index.html) | [Next Chapter: Requirements >>](requirements.html)
+[<< Previous Chapter: Introduction](introduction.html) | [Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)

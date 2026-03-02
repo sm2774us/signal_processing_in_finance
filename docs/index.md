@@ -8,42 +8,41 @@ Welcome to the official technical documentation for the **HFT Signal Processing 
 
 1.  @subpage introduction "Chapter 1: Introduction & Executive Overview"
 2.  @subpage getting_started "Chapter 2: Getting Started & Build Instructions"
-3.  @subpage requirements "Chapter 3: Engineering Requirements & Specifications"
-4.  @subpage hardware_arch "Chapter 4: Hardware Layer (Silicon & ASM)"
-5.  @subpage networking "Chapter 5: Network Layer (Kernel-Bypass)"
-6.  @subpage signal_processing "Chapter 6: Signal Layer (State Estimation)"
-7.  @subpage optimization "Chapter 7: Execution Layer (Convex Optimization)"
-8.  @subpage cpp26_features "Chapter 8: C++26 Modern Feature Deep-Dive"
-9.  @subpage verification "Chapter 9: Verification & Coverage Strategy"
-10. @subpage benchmarking "Chapter 10: Performance Benchmarking"
-11. @subpage citations "Chapter 11: Citations & Research"
+3.  @subpage hardware_arch "Chapter 3: Hardware Layer (Silicon & ASM)"
+4.  @subpage networking "Chapter 4: Network Layer (Kernel-Bypass)"
+5.  @subpage signal_processing "Chapter 5: Signal Layer (State Estimation)"
+6.  @subpage optimization "Chapter 6: Execution Layer (Convex Optimization)"
+7.  @subpage cpp26_features "Chapter 7: C++26 Modern Feature Deep-Dive"
+8.  @subpage verification "Chapter 8: Verification & Coverage Strategy"
+9.  @subpage benchmarking "Chapter 9: Performance Benchmarking"
+10. @subpage citations "Chapter 10: Citations & Research"
 
 ---
 
 ## 🏗️ Architectural Data Flow
 
-```text
-  ┌───────────────────────────────────────────────────────────────────┐
-  │                      SILICON / FPGA LAYER                         │
-  │                                                                   │
-  │  [Network Wire] ───► [TOE IP Core] ───► [AXI-DMA Engine]          │
-  │   (AXI-Stream)      (Price Filter)      (Data Transfer)           │
-  └──────────────────────────────┬────────────────────────────────────┘
-                                 │
-                                 │ (Zero-Copy DMA)
-                                 ▼
-  ┌───────────────────────────────────────────────────────────────────┐
-  │                      HOST CPU / C++26 LAYER                       │
-  │                                                                   │
-  │  [ef_vi Descriptor Ring] ◄─── (ASM MMIO Poll) ─── [TickConsumer]  │
-  │          │                                            │           │
-  │          │                                            ▼           │
-  │          │                                     [Kalman Filter]    │
-  │          │                                            │           │
-  │          ▼                                            ▼           │
-  │    [Order Entry] ◄──── [Convex Optimizer] ◄──── (std::mdspan)     │
-  └───────────────────────────────────────────────────────────────────┘
+![Architecture Diagram](docs/gen/architecture.svg)
+<details>
+  <summary>diagram source</summary>
+
+```mermaid
+graph TD
+    subgraph Silicon_Layer [Silicon / FPGA]
+        A[Network Wire] -->|AXI-Stream| B[TOE IP Core]
+        B -->|Price Filter| C[AXI-DMA Engine]
+    end
+    subgraph Host_CPU_Layer [Host CPU / C++26]
+        C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
+        D -->|ASM MMIO Poll| E[TickConsumer]
+        E -->|pre-condition| F[Kalman Filter]
+        F -->|std_mdspan| G[Convex Optimizer]
+        G -->|post-condition| H[Order Entry]
+    end
+    style B fill:#f96,stroke:#333
+    style D fill:#6cf,stroke:#333
+    style E fill:#9f9,stroke:#333
 ```
+</details>
 
 ---
 

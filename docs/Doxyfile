@@ -12,7 +12,6 @@ RECURSIVE              = YES
 INPUT                  = index.md \
                          introduction.md \
                          getting_started.md \
-                         requirements.md \
                          hardware.md \
                          networking.md \
                          signals.md \

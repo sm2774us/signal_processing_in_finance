@@ -1,4 +1,4 @@
-# Chapter 9: Verification & Coverage Strategy {#verification}
+# Chapter 8: Verification & Coverage Strategy {#verification}
 
 [<< Previous Chapter: C++26 Features](cpp26_features.html) | [Back to Table of Contents](index.html) | [Next Chapter: Benchmarking >>](benchmarking.html)
 

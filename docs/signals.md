@@ -1,4 +1,4 @@
-# Chapter 6: Signal Layer (State Estimation) {#signal_processing}
+# Chapter 5: Signal Layer (State Estimation) {#signal_processing}
 
 [<< Previous Chapter: Network Layer](networking.html) | [Back to Table of Contents](index.html) | [Next Chapter: Execution Layer >>](optimization.html)
 
