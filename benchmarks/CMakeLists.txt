@@ -13,6 +13,7 @@ target_link_libraries(signal_benchmarks PRIVATE
     kernel_bypass
     dma_engine
     Eigen3::Eigen
+    project_options
 )
 
 # Ensure it's built with the right flags

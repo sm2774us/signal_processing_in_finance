@@ -10,5 +10,6 @@ target_link_libraries(signal_tests PRIVATE
     optimizer
     hardware_bridge
     Eigen3::Eigen
+    project_options
 )
 add_test(NAME signal_tests COMMAND signal_tests)

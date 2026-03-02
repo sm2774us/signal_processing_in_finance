@@ -1,2 +1,3 @@
 add_library(tick_consumer INTERFACE)
 target_include_directories(tick_consumer INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(tick_consumer INTERFACE project_options)

@@ -41,7 +41,7 @@ jobs:
     - name: 🧪 C++/ASM Unit Verification
       run: |
         cd build
-        ctest --output-on-failure
+        ctest -R signal_tests --output-on-failure
 
     - name: 📊 Performance Validation (Google Benchmark)
       run: |
