@@ -46,4 +46,26 @@ This project serves as a showcase for the **C++26 Standard**:
 
 ---
 
+## 🏗️ Architectural Data Flow
+
+```mermaid
+graph TD
+    subgraph "Silicon (FPGA / SmartNIC)"
+        A[Network Wire] -->|AXI-Stream| B[TOE IP Core]
+        B -->|Price Filter| C[AXI-DMA Engine]
+    end
+    subgraph "Host CPU (Low-Latency C++26)"
+        C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
+        D -->|ASM MMIO Poll| E[TickConsumer]
+        E -->|"[[pre]]"| F[Kalman Filter]
+        F -->|std::mdspan| G[Convex Optimizer]
+        G -->|"[[post]]"| H[Order Entry]
+    end
+    style B fill:#f96,stroke:#333
+    style D fill:#6cf,stroke:#333
+    style E fill:#9f9,stroke:#333
+```
+
+---
+
 [Next Chapter: Engineering Requirements & Specifications >>](requirements.html)

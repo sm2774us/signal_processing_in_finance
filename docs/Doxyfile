@@ -7,13 +7,13 @@ EXTRACT_ALL            = YES
 RECURSIVE              = YES
 
 # Multi-Language Support
-# Include docs directory for manual.md and other chapters
 INPUT                  = docs libs hardware/asm hardware/vhdl README.md technical_specification
 FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
 
 # Main Page and Layout
 USE_MDFILE_AS_MAINPAGE = docs/manual.md
+HTML_HEADER            = docs/header.html
 
 # VHDL Specifics
 OPTIMIZE_OUTPUT_VHDL   = YES
@@ -21,7 +21,12 @@ OPTIMIZE_OUTPUT_VHDL   = YES
 # Modern UI (Doxygen Awesome)
 HTML_EXTRA_STYLESHEET  = https://raw.githubusercontent.com/jothepro/doxygen-awesome-css/main/doxygen-awesome.css
 GENERATE_TREEVIEW      = YES
+
+# MathJax for equations
 USE_MATHJAX            = YES
+MATHJAX_FORMAT         = HTML-CSS
+MATHJAX_RELPATH        = https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/
+MATHJAX_EXTENSIONS     = TeX/AMSmath TeX/AMSsymbols
 
 # Source Browser
 SOURCE_BROWSER         = YES
