@@ -3,7 +3,9 @@
 #include <execution> // C++26 Sender/Receiver (P2300)
 #include <cstdint>
 #include <memory>
+#if __has_include(<debugging>)
 #include <debugging> // For std::breakpoint()
+#endif
 #include "hardware/asm/hardware_asm.hpp"
 
 /**
@@ -25,6 +27,7 @@ public:
         : regs_(std::make_unique<HardwareRegs>()) {
         regs_->threshold = threshold;
         regs_->status = 0;
+        regs_->last_price = 0;
     }
 
     /**
@@ -33,18 +36,31 @@ public:
      */
     auto async_wait() {
         return std::execution::just() | std::execution::then([this] {
-            while (!(asm_io::mmio_read64(&regs_->status) & 0x1)) {
-                asm_io::cpu_pause();
-            }
-            regs_->status = 0;
+            wait_for_trigger();
         });
+    }
+
+    /**
+     * @brief Blocking wait for hardware trigger.
+     */
+    void wait_for_trigger() {
+        while (!(asm_io::mmio_read64(&regs_->status) & 0x1)) {
+            asm_io::cpu_pause();
+        }
+        regs_->status = 0;
     }
 
     /**
      * @brief Triggers a breakpoint for debugging in error paths.
      */
     void debug_trap() {
+#if __has_include(<debugging>)
         std::breakpoint(); // C++26 standard debugging support
+#endif
+    }
+
+    void on_hardware_tick(uint64_t price) {
+        simulate_fpga_write(price);
     }
 
     void simulate_fpga_write(uint64_t price) {

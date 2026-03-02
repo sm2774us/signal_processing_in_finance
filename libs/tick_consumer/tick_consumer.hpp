@@ -19,6 +19,7 @@ struct alignas(64) Tick {
     uint64_t timestamp_ns;
     double price;
     double volume;
+    const char* symbol;
 };
 
 class TickConsumer {
@@ -29,7 +30,15 @@ public:
      */
     static void accumulate_volume(uint64_t& total, uint64_t increment) noexcept {
         // C++26: std::add_sat ensures the result clamps at UINT64_MAX instead of wrapping.
+#if __cpp_lib_saturation_arithmetic >= 202311L
         total = std::add_sat(total, increment);
+#else
+        if (uint64_t(UINT64_MAX - total) < increment) {
+            total = UINT64_MAX;
+        } else {
+            total += increment;
+        }
+#endif
     }
 
     /**
@@ -47,6 +56,11 @@ public:
         Tick tick{};
         // Parsing logic...
         return tick;
+    }
+
+    static void normalize(Tick& tick, double price_scale, double volume_scale) noexcept {
+        tick.price *= price_scale;
+        tick.volume *= volume_scale;
     }
 };
 
