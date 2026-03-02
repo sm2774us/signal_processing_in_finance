@@ -88,6 +88,7 @@ This repository implements a **world-class, 100% production-grade HFT signal pro
 
 ### 3. 🧠 Signal Layer (L2) - State Estimation
 - **Kalman Filter:** Uses a numerically stable **Eigen::LDLT** decomposition to estimate the "Fair Value" of noisy signals.
+
 $$
 \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1})
 $$
@@ -96,6 +97,7 @@ $$
 
 ### 4. 📈 Execution Layer (L3) - Convex Optimization
 - **Mean-Variance Optimizer:** Solves for optimal weights $w$ to maximize risk-adjusted predicted returns $\alpha$.
+
 $$
 \max_{w} \left( \alpha^T w - \frac{\lambda}{2} w^T \Sigma w \right)
 $$
