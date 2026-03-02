@@ -16,22 +16,27 @@ In modern high-frequency trading (HFT), every nanosecond counts. Standard OS net
 
 ### Architectural Data Flow
 
-```mermaid
-graph TD
-    subgraph Silicon_Layer [Silicon / FPGA]
-        A[Network Wire] -->|AXI-Stream| B[TOE IP Core]
-        B -->|Price Filter| C[AXI-DMA Engine]
-    end
-    subgraph Host_CPU_Layer [Host CPU / C++26]
-        C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
-        D -->|ASM MMIO Poll| E[TickConsumer]
-        E -->|pre-condition| F[Kalman Filter]
-        F -->|std_mdspan| G[Convex Optimizer]
-        G -->|post-condition| H[Order Entry]
-    end
-    style B fill:#f96,stroke:#333
-    style D fill:#6cf,stroke:#333
-    style E fill:#9f9,stroke:#333
+```text
+  ┌───────────────────────────────────────────────────────────────────┐
+  │                      SILICON / FPGA LAYER                         │
+  │                                                                   │
+  │  [Network Wire] ───► [TOE IP Core] ───► [AXI-DMA Engine]          │
+  │   (AXI-Stream)      (Price Filter)      (Data Transfer)           │
+  └──────────────────────────────┬────────────────────────────────────┘
+                                 │
+                                 │ (Zero-Copy DMA)
+                                 ▼
+  ┌───────────────────────────────────────────────────────────────────┐
+  │                      HOST CPU / C++26 LAYER                       │
+  │                                                                   │
+  │  [ef_vi Descriptor Ring] ◄─── (ASM MMIO Poll) ─── [TickConsumer]  │
+  │          │                                            │           │
+  │          │                                            ▼           │
+  │          │                                     [Kalman Filter]    │
+  │          │                                            │           │
+  │          ▼                                            ▼           │
+  │    [Order Entry] ◄──── [Convex Optimizer] ◄──── (std::mdspan)     │
+  └───────────────────────────────────────────────────────────────────┘
 ```
 
 ---

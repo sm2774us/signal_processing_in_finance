@@ -7,19 +7,12 @@
 <meta name="generator" content="Doxygen $doxygenversion"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- BEGIN opengraph metadata -->
-<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:title" content="HFT Signal Processing Stack" />
 <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
-<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<meta property="og:description" content="Production-Grade C++26/VHDL/ASM Monorepo Documentation" />
 <!-- END opengraph metadata -->
-<!-- BEGIN twitter metadata -->
-<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
-<meta name="twitter:title" content="Doxygen Awesome" />
-<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
-<!-- END twitter metadata -->
 <title>$title</title>
 <link href="$relpath^tabs.css" rel="stylesheet" type="text/css"/>
-<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
 <script type="text/javascript" src="$relpath^jquery.js"></script>
 <script type="text/javascript" src="$relpath^dynsections.js"></script>
 <script type="text/javascript" src="$relpath^doxygen-awesome-darkmode-toggle.js"></script>
@@ -40,20 +33,20 @@
 <script type="text/javascript" src="$relpath^navtreedata.js"></script>
 <script type="text/javascript" src="$relpath^navtree.js"></script>
 $search
-$mathjax
+<!-- MathJax Support -->
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 <link href="$relpath^$stylesheet" rel="stylesheet" type="text/css" />
 $extrastylesheet
-<!-- Mermaid support -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-    $(document).ready(function() {
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'default'
-        });
-        window.mermaid.init(undefined, ".mermaid");
-    });
-</script>
 </head>
 <body>
 <!-- https://github.com/jothepro/doxygen-awesome-css -->
@@ -65,6 +58,7 @@ $extrastylesheet
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">$projectname
    </div>
+   <div id="projectbrief">$projectbrief</div>
   </td>
  </tr>
  </tbody>

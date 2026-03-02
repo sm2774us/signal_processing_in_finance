@@ -46,11 +46,11 @@ GENERATE_TREEVIEW      = YES
 DISABLE_INDEX          = NO
 FULL_SIDEBAR           = YES
 
-# MathJax for equations
+# MathJax for equations (handled manually in header.html)
 USE_MATHJAX            = YES
 MATHJAX_FORMAT         = HTML-CSS
-MATHJAX_RELPATH        = https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/
-MATHJAX_EXTENSIONS     = TeX/AMSmath TeX/AMSsymbols
+MATHJAX_RELPATH        = 
+MATHJAX_EXTENSIONS     = 
 
 # Source Browser
 SOURCE_BROWSER         = YES
