@@ -8,12 +8,14 @@ RECURSIVE              = YES
 
 # Multi-Language Support
 # Run from 'docs' dir, so paths are relative to 'docs'
-INPUT                  = . ../libs ../hardware/asm ../hardware/vhdl ../README.md ../technical_specification
+# EXCLUDE root README.md to prevent it from being the main page
+INPUT                  = . ../libs ../hardware/asm ../hardware/vhdl ../technical_specification
 EXAMPLE_PATH           = ..
 FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
 
 # Main Page and Layout
+# This MUST be the filename only as it is in the current directory (docs/)
 USE_MDFILE_AS_MAINPAGE = manual.md
 HTML_HEADER            = header.html
 
