@@ -15,21 +15,19 @@ Welcome to the official technical documentation for the **HFT Signal Processing 
 
 ---
 
-## 🚀 Overview
+## 🚀 Executive Architecture Overview
 
-This repository implements a high-fidelity monorepo mirroring the elite engineering standards of firms like **Citadel, Jane Street, HRT, Optiver, and Tower Research**. The solution features a co-designed hardware-software pipeline leveraging **C++26**, **Silicon-grade VHDL**, and **x86-64 MMIO Assembly**.
+The solution features a co-designed hardware-software pipeline leveraging **C++26**, **Silicon-grade VHDL**, and **x86-64 MMIO Assembly**.
 
----
-
-## 🏗️ Architectural Data Flow
+### 🏗️ Architectural Data Flow
 
 ```mermaid
 graph TD
-    subgraph Silicon_Layer
+    subgraph Silicon_Layer [Silicon / FPGA]
         A[Network Wire] -->|AXI-Stream| B[TOE IP Core]
         B -->|Price Filter| C[AXI-DMA Engine]
     end
-    subgraph Host_CPU_Layer
+    subgraph Host_CPU_Layer [Host CPU / C++26]
         C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
         D -->|ASM MMIO Poll| E[TickConsumer]
         E -->|pre-condition| F[Kalman Filter]
@@ -43,14 +41,4 @@ graph TD
 
 ---
 
-## 🔥 Cutting-Edge C++26 Feature Deep-Dive
-
-This project serves as a showcase for the **C++26 Standard**:
-- **🛡️ Design by Contract:** `[[pre:]]`, `[[post:]]`, and `[[assert:]]` enforce formal logic.
-- **🌐 Asynchronous Execution:** `std::execution` implements the Sender/Receiver model.
-- **🔢 Saturation Arithmetic:** `std::add_sat` ensures safe volume accumulation.
-- **🔲 Placeholder Variables:** The `_` placeholder in structured bindings.
-
----
-
-[Next Chapter: Engineering Requirements & Specifications >>](requirements.html)
+[Proceed to Chapter 1: Engineering Requirements >>](requirements.html)

@@ -16,18 +16,20 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install Documentation Tools
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      - name: Generate Professional Manual
-        # We run from the docs directory so Doxyfile relative paths work perfectly
+      - name: Build Professional Manual
         run: |
           cd docs
+          # Doxygen will produce HTML in docs/gen/html
           doxygen Doxyfile
-          # Ensure GitHub doesn't try to process the output with Jekyll
+          # Ensure .nojekyll is in the output root
           touch gen/html/.nojekyll
 
       - name: Deploy to GitHub Pages
@@ -39,4 +41,4 @@ jobs:
           force_orphan: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: "Deploy professional book-like manual to GitHub Pages"
+          commit_message: "WELD IT SHUT: Deploy structured book-like manual"

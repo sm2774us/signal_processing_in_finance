@@ -1,4 +1,5 @@
 PROJECT_NAME           = "HFT Signal Processing Stack"
+PROJECT_BRIEF          = "Production-Grade C++26/VHDL/ASM Monorepo"
 OUTPUT_DIRECTORY       = gen
 GENERATE_LATEX         = NO
 GENERATE_HTML          = YES
@@ -7,19 +8,27 @@ EXTRACT_ALL            = YES
 RECURSIVE              = YES
 
 # Multi-Language Support
-# Run from 'docs' dir, so paths are relative to 'docs'
-INPUT                  = . \
+# Run from 'docs' dir. index.md is the entry point.
+INPUT                  = index.md \
+                         requirements.md \
+                         hardware.md \
+                         networking.md \
+                         signals.md \
+                         optimization.md \
+                         verification.md \
                          ../libs \
                          ../hardware/asm \
                          ../hardware/vhdl \
                          ../technical_specification
 
+# EXPLICITLY EXCLUDE README to avoid it becoming the main page
+EXCLUDE                = ../README.md
+
 EXAMPLE_PATH           = ..
 FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
 
-# Main Page and Layout
-# index.md contains the @mainpage tag and defines the book structure
+# Force index.md as the main page
 USE_MDFILE_AS_MAINPAGE = index.md
 HTML_HEADER            = header.html
 
