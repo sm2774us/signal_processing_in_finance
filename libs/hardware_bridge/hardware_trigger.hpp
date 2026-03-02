@@ -12,8 +12,12 @@
 #include <execution>
 #endif
 
-#ifndef __cpp_lib_execution
-namespace hft::hardware::execution_mock {
+namespace hft::hardware {
+
+#if defined(__cpp_lib_execution) && __cpp_lib_execution >= 202311L
+namespace execution = std::execution;
+#else
+namespace execution {
     struct dummy_sender {};
     inline dummy_sender just() { return {}; }
     template<typename F>
@@ -21,17 +25,12 @@ namespace hft::hardware::execution_mock {
     template<typename F>
     inline dummy_sender operator|(dummy_sender s, F&& f) { return then(s, std::forward<F>(f)); }
 }
-namespace std::execution {
-    using namespace hft::hardware::execution_mock;
-}
 #endif
 
 /**
  * @file hardware_trigger.hpp
  * @brief C++26 Asynchronous Hardware Bridge using Senders/Receivers.
  */
-
-namespace hft::hardware {
 
 class HardwareTrigger {
 public:
@@ -53,7 +52,7 @@ public:
      * Replaces raw spin-loops with a composable sender/receiver pattern.
      */
     auto async_wait() {
-        return std::execution::just() | std::execution::then([this] {
+        return execution::just() | execution::then([this] {
             wait_for_trigger();
         });
     }

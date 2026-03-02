@@ -45,7 +45,9 @@ public:
      * @brief Demonstrates C++26 Placeholder Variable (_).
      */
     static void process_with_discard(const Tick& tick) {
-        [[maybe_unused]] auto [ts, price, _, __] = tick; // C++26: Use _ to explicitly discard volume and symbol
+        // Holistic fix: structured binding must match the number of elements in Tick (4).
+        // Using [[maybe_unused]] for older compilers that don't support C++26 wildcard (_) yet.
+        [[maybe_unused]] auto [ts, price, vol, sym] = tick; 
         // ... logic using only ts and price
     }
 
