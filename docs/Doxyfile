@@ -7,9 +7,13 @@ EXTRACT_ALL            = YES
 RECURSIVE              = YES
 
 # Multi-Language Support
-INPUT                  = libs hardware/asm hardware/vhdl README.md
-FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.vhd *.s *.asm
+# Include docs directory for manual.md and other chapters
+INPUT                  = docs libs hardware/asm hardware/vhdl README.md technical_specification
+FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
+
+# Main Page and Layout
+USE_MDFILE_AS_MAINPAGE = docs/manual.md
 
 # VHDL Specifics
 OPTIMIZE_OUTPUT_VHDL   = YES
@@ -22,3 +26,7 @@ USE_MATHJAX            = YES
 # Source Browser
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = YES
+
+# Markdown support
+MARKDOWN_SUPPORT       = YES
+AUTOLINK_SUPPORT       = YES

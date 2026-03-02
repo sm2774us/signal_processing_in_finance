@@ -1,7 +1,7 @@
 # Signal Processing in Finance: HFT Signal Stack (World-Class C++26 & Silicon)
 
-[![Production CI](https://github.com/your-repo/actions/workflows/ci.yml/badge.svg)](https://github.com/your-repo/actions)
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue.svg)](https://your-pages.github.io/)
+[![Production CI](https://github.com/sm2774us/signal_processing_in_finance/actions/workflows/ci.yml/badge.svg)](https://github.com/sm2774us/signal_processing_in_finance/actions)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue.svg)](https://sm2774us.github.io/signal_processing_in_finance/)
 [![C++26](https://img.shields.io/badge/C%2B%2B-26-blue.svg)](https://en.cppreference.com/w/cpp/26)
 [![Latency](https://img.shields.io/badge/Latency-Sub--Microsecond-green.svg)]()
 
