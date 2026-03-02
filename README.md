@@ -118,10 +118,6 @@ This project serves as a showcase for the **C++26 Standard**:
 
 ## 🏗️ Architectural Data Flow
 
-![Architecture Diagram](docs/gen/architecture.svg)
-<details>
-  <summary>diagram source</summary>
-
 ```mermaid
 graph TD
     subgraph Silicon_Layer [Silicon / FPGA]
@@ -139,7 +135,6 @@ graph TD
     style D fill:#6cf,stroke:#333
     style E fill:#9f9,stroke:#333
 ```
-</details>
 
 ---
 
