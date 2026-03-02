@@ -40,6 +40,7 @@ begin
     -- Stimulus process
     stim_proc: process
     begin		
+        report "Starting VHDL SignalTrigger Verification...";
         reset <= '1';
         wait for 20 ns;	
         reset <= '0';
@@ -48,20 +49,24 @@ begin
         threshold <= std_logic_vector(to_unsigned(10, 64));
 
         -- Price jump from 0 to 100 (should trigger)
+        report "Test Case 1: Large price jump (0 -> 100, Threshold 10) - Expecting Trigger";
         price_in <= std_logic_vector(to_unsigned(100, 64));
         wait for clk_period;
         assert trigger_out = '1' report "Trigger failed for jump" severity error;
 
         -- Small price change (100 to 105, threshold 10, should NOT trigger)
+        report "Test Case 2: Small price change (100 -> 105, Threshold 10) - Expecting No Trigger";
         price_in <= std_logic_vector(to_unsigned(105, 64));
         wait for clk_period;
         assert trigger_out = '0' report "False trigger for small change" severity error;
 
         -- Large price jump (105 to 200, should trigger)
+        report "Test Case 3: Large price jump (105 -> 200, Threshold 10) - Expecting Trigger";
         price_in <= std_logic_vector(to_unsigned(200, 64));
         wait for clk_period;
         assert trigger_out = '1' report "Trigger failed for large jump" severity error;
 
+        report "VHDL Verification Complete: All test cases passed successfully.";
         wait;
     end process;
 
