@@ -12,4 +12,4 @@ ghdl -a tests/signal_trigger_tb.vhd
 ghdl -e SignalTrigger_TB
 
 # 3. Run
-ghdl -r SignalTrigger_TB --assert-level=error
+ghdl -r SignalTrigger_TB --assert-level=error --stop-time=1us
