@@ -49,6 +49,6 @@ jobs:
 
     - name: 📉 Coverage Reporting (LCOV)
       run: |
-        lcov --capture --directory . --output-file coverage.info --gcov-tool gcov-14
-        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/_deps/*' --output-file coverage.info --gcov-tool gcov-14
+        lcov --capture --directory . --output-file coverage.info --gcov-tool gcov-14 --ignore-errors mismatch,atleast
+        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/_deps/*' --output-file coverage.info --gcov-tool gcov-14 --ignore-errors unused,atleast
         lcov --list coverage.info --gcov-tool gcov-14
