@@ -3,10 +3,12 @@
 [<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: Verification >>](verification.html)
 
 ## Mean-Variance Optimizer (L3)
-The optimizer (`libs/optimizer/convex_optimizer.hpp`) solves for optimal position sizes.
+The optimizer (`libs/optimizer/convex_optimizer.hpp`) solves for optimal portfolio weights.
 
 ### Mathematical Formulation:
-$$ 	ext{maximize } \alpha^T w - \frac{\lambda}{2} w^T \Sigma w $$
+\f[
+\max_{w} \left( \alpha^T w - \frac{\lambda}{2} w^T \Sigma w \right)
+\f]
 
 ### Performance & Safety:
 - **C++26 Contracts:** Enforces mathematical invariants using `[[pre]]` and `[[post]]`.

@@ -10,6 +10,10 @@ The Kalman filter (`libs/state_estimator/kalman_filter.hpp`) denoises price sign
 - **Numerical Stability:** Designed for LDLT decomposition.
 - **C++26 Views:** Uses `std::mdspan` (protected by `__has_include`) to provide standardized data views of the state vector.
 
+\f[
+\hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1})
+\f]
+
 ## Tick Consumer (L1)
 The `libs/tick_consumer/tick_consumer.hpp` provides nano-second parsing logic.
 - **Robust CSV Parsing:** Handles malformed input and performs error checking using `std::expected`.

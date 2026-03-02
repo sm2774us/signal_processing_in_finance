@@ -15,7 +15,7 @@ Welcome to the official technical documentation for the **HFT Signal Processing 
 
 ---
 
-## 🚀 Overview (from README)
+## 🚀 Overview
 
 This repository implements a high-fidelity monorepo mirroring the elite engineering standards of firms like **Citadel, Jane Street, HRT, Optiver, and Tower Research**. The solution features a co-designed hardware-software pipeline leveraging **C++26**, **Silicon-grade VHDL**, and **x86-64 MMIO Assembly**.
 
@@ -57,9 +57,9 @@ graph TD
     subgraph "Host CPU (Low-Latency C++26)"
         C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
         D -->|ASM MMIO Poll| E[TickConsumer]
-        E -->|"[[pre]]"| F[Kalman Filter]
+        E -->|pre-condition| F[Kalman Filter]
         F -->|std::mdspan| G[Convex Optimizer]
-        G -->|"[[post]]"| H[Order Entry]
+        G -->|post-condition| H[Order Entry]
     end
     style B fill:#f96,stroke:#333
     style D fill:#6cf,stroke:#333

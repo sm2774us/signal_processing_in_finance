@@ -111,9 +111,9 @@ graph TD
     subgraph "Host CPU (Low-Latency C++26)"
         C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
         D -->|ASM MMIO Poll| E[TickConsumer]
-        E -->|"[[pre]]"| F[Kalman Filter]
+        E -->|pre-condition| F[Kalman Filter]
         F -->|std::mdspan| G[Convex Optimizer]
-        G -->|"[[post]]"| H[Order Entry]
+        G -->|post-condition| H[Order Entry]
     end
     style B fill:#f96,stroke:#333
     style D fill:#6cf,stroke:#333
