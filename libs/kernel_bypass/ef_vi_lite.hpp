@@ -3,6 +3,8 @@
 #include <vector>
 #include <atomic>
 #include <cstdint>
+#include <memory>
+#include <cstring>
 #include "hardware/asm/hardware_asm.hpp"
 
 /**
@@ -23,6 +25,12 @@ struct alignas(64) ef_descriptor {
     uint64_t addr;      ///< Address of the packet buffer in Host RAM (DMA target)
     uint32_t len;       ///< Length of the packet data
     std::atomic<uint32_t> flags; ///< Ownership flag: 0 = HW, 1 = SW
+
+    ef_descriptor() : addr(0), len(0), flags(0) {}
+    
+    // std::atomic makes this struct non-copyable and non-movable.
+    ef_descriptor(const ef_descriptor&) = delete;
+    ef_descriptor& operator=(const ef_descriptor&) = delete;
 };
 
 /**
@@ -31,10 +39,11 @@ struct alignas(64) ef_descriptor {
  */
 class ef_vi_context {
 public:
-    explicit ef_vi_context(size_t ring_size) : ring_size_(ring_size) {
-        descriptors_.resize(ring_size);
-        buffers_.resize(ring_size * 2048); // 2KB buffers per descriptor
-        
+    explicit ef_vi_context(size_t ring_size) 
+        : ring_size_(ring_size),
+          descriptors_(std::make_unique<ef_descriptor[]>(ring_size)),
+          buffers_(ring_size * 2048) // 2KB buffers per descriptor
+    {
         for (size_t i = 0; i < ring_size; ++i) {
             descriptors_[i].addr = reinterpret_cast<uint64_t>(&buffers_[i * 2048]);
             descriptors_[i].flags.store(0, std::memory_order_release);
@@ -50,7 +59,7 @@ public:
     [[nodiscard]] const uint8_t* receive() noexcept {
         ef_descriptor& desc = descriptors_[current_index_];
         
-        // Use ASM MMIO style read to check for "Software Ownership" flag
+        // Use atomic load to check for "Software Ownership" flag
         if (desc.flags.load(std::memory_order_acquire) == 1) {
             const uint8_t* data = reinterpret_cast<const uint8_t*>(desc.addr);
             
@@ -79,7 +88,7 @@ private:
     size_t ring_size_;
     size_t current_index_ = 0;
     size_t hw_index_ = 0;
-    std::vector<ef_descriptor> descriptors_;
+    std::unique_ptr<ef_descriptor[]> descriptors_;
     std::vector<uint8_t> buffers_;
 };
 

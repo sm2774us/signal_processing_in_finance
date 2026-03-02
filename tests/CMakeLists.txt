@@ -1,4 +1,4 @@
-add_executable(signal_tests signal_tests.cpp)
+add_executable(signal_tests signal_tests.cpp asm_tests.cpp ../hardware/asm/simd_ops.cpp)
 
 # Allow the tests to include libraries using relative paths from the root
 target_include_directories(signal_tests PRIVATE ${CMAKE_SOURCE_DIR})

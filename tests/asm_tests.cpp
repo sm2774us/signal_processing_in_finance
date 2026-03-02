@@ -2,7 +2,10 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
-#include "hardware/asm/simd_ops.cpp"
+
+namespace hft::signals::asm_opt {
+    void normalize_prices_avx512(double* prices, size_t count, double scale);
+}
 
 namespace hft::signals::asm_opt::tests {
 
