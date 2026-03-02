@@ -1,13 +1,23 @@
-# Verification & Coverage Strategy {#verification}
+# Chapter 6: Verification & Coverage Strategy {#verification}
 
-## C++ Unit Verification
-- **Framework:** Google Test (GTest)
-- **Coverage Target:** 100% LCOV coverage for all signal logic.
+[<< Previous Chapter: Execution Layer](optimization.html) | [Back to Table of Contents](index.html)
 
-## VHDL Silicon Simulation
-- **Toolchain:** GHDL
-- **Testbench:** Timing-accurate simulation of AXI-Stream bus transactions.
+## Quality Standards
+The HFT Signal Processing Stack is built with a "Verification First" mindset.
 
-## Performance Benchmarking
-- **Framework:** Google Benchmark
-- **Latency Targets:** Sub-microsecond end-to-end tick-to-trade.
+### 1. C++ Core Verification
+- **Framework:** Google Test (GTest).
+- **Coverage:** 100% LCOV coverage target for all libraries.
+- **CI Enforcement:** Automated via GitHub Actions with GCC 14.
+
+### 2. Silicon Logic Verification
+- **Framework:** GHDL.
+- **Simulation:** Timing-accurate testbench (`tests/signal_trigger_tb.vhd`).
+
+### 3. Performance Benchmarking
+- **Framework:** Google Benchmark.
+- **Target:** Proving sub-microsecond end-to-end performance in a simulated environment.
+
+---
+
+[<< Previous Chapter: Execution Layer](optimization.html) | [Back to Table of Contents](index.html)

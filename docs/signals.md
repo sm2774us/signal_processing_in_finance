@@ -1,10 +1,20 @@
-# Signal Processing Logic {#signal_processing}
+# Chapter 4: Signal Layer (State Estimation) {#signal_processing}
+
+[<< Previous Chapter: Network Layer](networking.html) | [Back to Table of Contents](index.html) | [Next Chapter: Execution Layer >>](optimization.html)
 
 ## Kalman Filter (L2)
-The Kalman filter (`libs/state_estimator/kalman_filter.hpp`) provides real-time state estimation of noisy market data.
-- **Mathematical Core:** Eigen3 LDLT for numerical stability.
-- **C++26 Views:** `std::mdspan` is used to provide non-owning views of the state vector.
+The Kalman filter (`libs/state_estimator/kalman_filter.hpp`) denoises price signals in real-time.
 
-## Convex Optimization (L3)
-The optimizer (`libs/optimizer/convex_optimizer.hpp`) calculates optimal portfolio weights.
-- **Contract Enforcement:** Uses C++26 `[[pre]]` and `[[post]]` to ensure mathematical invariants.
+### Implementation Details:
+- **Matrix Math:** Built on **Eigen::Dense** for high-performance linear algebra.
+- **Numerical Stability:** Designed for LDLT decomposition.
+- **C++26 Views:** Uses `std::mdspan` (protected by `__has_include`) to provide standardized data views of the state vector.
+
+## Tick Consumer (L1)
+The `libs/tick_consumer/tick_consumer.hpp` provides nano-second parsing logic.
+- **Robust CSV Parsing:** Handles malformed input and performs error checking using `std::expected`.
+- **Saturation Arithmetic:** Uses `std::add_sat` (or custom fallback) for safe volume accumulation.
+
+---
+
+[<< Previous Chapter: Network Layer](networking.html) | [Back to Table of Contents](index.html) | [Next Chapter: Execution Layer >>](optimization.html)

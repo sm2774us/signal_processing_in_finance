@@ -1,12 +1,24 @@
-# Hardware & Assembly Architecture {#hardware_arch}
+# Chapter 2: Hardware Layer (Silicon & ASM) {#hardware_arch}
+
+[<< Previous Chapter: Requirements](requirements.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
 
 ## VHDL Silicon Trigger
-The hardware layer is implemented in `hardware/vhdl/signal_trigger.vhd`. It provides:
-- **AXI-Stream Interface:** For high-throughput market data ingestion.
-- **AXI-Lite Interface:** For runtime configuration of trigger thresholds.
-- **Hardware Filtering:** Only price moves exceeding the threshold are forwarded to the CPU.
+The hardware layer (`hardware/vhdl/signal_trigger.vhd`) implements a simple signal trigger based on price jumps.
+- **Active-High Reset:** Matches standard FPGA design patterns.
+- **Synchronous Logic:** Processes price data on each clock edge.
+- **Threshold Comparison:** Only triggers `trigger_out` when the absolute price change exceeds the `threshold`.
 
 ## x86-64 MMIO Assembly
-Located in `hardware/asm/hardware_asm.hpp`, this layer provides the lowest-level interface to the hardware:
-- **Memory Barriers:** Using `lfence` to ensure read-after-write consistency.
-- **Low-Latency Polling:** Using the `pause` instruction to optimize spin-loops.
+Located in `hardware/asm/hardware_asm.hpp`, this layer provides cross-platform x86-64 assembly/intrinsics for MMIO.
+- **mmio_read64:** Performs a low-latency 64-bit read with `lfence` memory fences.
+- **cpu_pause:** Emits a `pause` instruction to optimize spin-loops.
+
+## SIMD Optimization
+The `hardware/asm/simd_ops.cpp` file provides AVX-512 and AVX2 optimized normalization:
+- **AVX-512:** Processes 8 doubles per iteration.
+- **AVX2:** Processes 4 doubles per iteration (fallback).
+- **Scalar:** Standard C++ fallback for tail elements.
+
+---
+
+[<< Previous Chapter: Requirements](requirements.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
