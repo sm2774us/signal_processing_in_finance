@@ -19,11 +19,28 @@ namespace execution = std::execution;
 #else
 namespace execution {
     struct dummy_sender {};
+
+    // Closure for 'then' to support pipe operator: sender | then(func)
+    template<typename F>
+    struct then_closure {
+        F func;
+    };
+
     inline dummy_sender just() { return {}; }
+
+    // Two-argument 'then'
     template<typename F>
     inline dummy_sender then(dummy_sender, F&&) { return {}; }
+
+    // One-argument 'then' (returns a closure)
     template<typename F>
-    inline dummy_sender operator|(dummy_sender s, F&& f) { return then(s, std::forward<F>(f)); }
+    inline then_closure<F> then(F&& f) { return {std::forward<F>(f)}; }
+
+    // Pipe operator for sender and closure
+    template<typename F>
+    inline dummy_sender operator|(dummy_sender s, then_closure<F>&& c) { 
+        return then(s, std::forward<F>(c.func)); 
+    }
 }
 #endif
 
