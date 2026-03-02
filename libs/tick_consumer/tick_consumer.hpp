@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <numeric>
 #include <expected>
-#include <numeric> // For saturation arithmetic
+#include <string>
 
 /**
  * @file tick_consumer.hpp
@@ -52,11 +52,46 @@ public:
     }
 
     [[nodiscard]] static std::expected<Tick, int> parse_csv(std::string_view line) noexcept {
-        /* [[pre: !line.empty()]] */
         if (line.empty()) return std::unexpected(-1);
 
+        size_t first_comma = line.find(',');
+        size_t second_comma = line.find(',', first_comma + 1);
+        
+        if (first_comma == std::string_view::npos || second_comma == std::string_view::npos) {
+            return std::unexpected(-2);
+        }
+
         Tick tick{};
-        // Parsing logic...
+        std::string_view ts_str = line.substr(0, first_comma);
+        std::string_view price_str = line.substr(first_comma + 1, second_comma - first_comma - 1);
+        std::string_view vol_str = line.substr(second_comma + 1);
+
+        if (ts_str.empty() || price_str.empty() || vol_str.empty()) {
+            return std::unexpected(-3);
+        }
+
+        // Parse timestamp
+        auto [ptr1, ec1] = std::from_chars(ts_str.data(), ts_str.data() + ts_str.size(), tick.timestamp_ns);
+        if (ec1 != std::errc() || ptr1 != ts_str.data() + ts_str.size()) {
+            return std::unexpected(-4);
+        }
+
+        // Parse price and volume
+        try {
+            size_t p_pos = 0;
+            std::string p_s(price_str);
+            tick.price = std::stod(p_s, &p_pos);
+            if (p_pos != p_s.size()) return std::unexpected(-5);
+
+            size_t v_pos = 0;
+            std::string v_s(vol_str);
+            tick.volume = std::stod(v_s, &v_pos);
+            if (v_pos != v_s.size()) return std::unexpected(-6);
+        } catch (...) {
+            return std::unexpected(-7);
+        }
+
+        tick.symbol = "SIMULATED";
         return tick;
     }
 
