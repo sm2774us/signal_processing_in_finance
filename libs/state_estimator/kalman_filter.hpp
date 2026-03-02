@@ -1,7 +1,9 @@
 #pragma once
 
 #include <Eigen/Dense>
+#if __has_include(<mdspan>)
 #include <mdspan>
+#endif
 
 /**
  * @file kalman_filter.hpp
@@ -40,9 +42,15 @@ public:
         P = (I - K * H) * P;
     }
 
+    [[nodiscard]] const Eigen::Vector<double, StateDim>& get_state() const noexcept {
+        return x;
+    }
+
+#if __has_include(<mdspan>)
     [[nodiscard]] auto get_state_view() const noexcept {
         return std::mdspan<const double, std::extents<size_t, StateDim>>(x.data());
     }
+#endif
 
     Eigen::Matrix<double, StateDim, StateDim> A, Q, P;
     Eigen::Matrix<double, ObsDim, StateDim> H;
