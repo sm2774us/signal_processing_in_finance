@@ -8,15 +8,20 @@ RECURSIVE              = YES
 
 # Multi-Language Support
 # Run from 'docs' dir, so paths are relative to 'docs'
-INPUT                  = . ../libs ../hardware/asm ../hardware/vhdl ../technical_specification
+INPUT                  = . \
+                         ../libs \
+                         ../hardware/asm \
+                         ../hardware/vhdl \
+                         ../technical_specification
+
 EXAMPLE_PATH           = ..
 FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
 
 # Main Page and Layout
+# index.md contains the @mainpage tag and defines the book structure
 USE_MDFILE_AS_MAINPAGE = index.md
 HTML_HEADER            = header.html
-HTML_EXTRA_FILES       = .nojekyll
 
 # VHDL Specifics
 OPTIMIZE_OUTPUT_VHDL   = YES
@@ -24,6 +29,8 @@ OPTIMIZE_OUTPUT_VHDL   = YES
 # Modern UI (Doxygen Awesome)
 HTML_EXTRA_STYLESHEET  = https://raw.githubusercontent.com/jothepro/doxygen-awesome-css/main/doxygen-awesome.css
 GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = YES
 
 # MathJax for equations
 USE_MATHJAX            = YES

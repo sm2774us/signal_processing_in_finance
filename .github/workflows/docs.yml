@@ -5,23 +5,32 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Install Documentation Tools
+      - name: Install Doxygen and Graphviz
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      - name: Generate Doxygen (C++, VHDL, ASM)
+      - name: Build Doxygen Manual
+        working-directory: docs
         run: |
-          cd docs
+          # The Doxyfile in this directory uses index.md as the main page
+          # and includes requirements.md, hardware.md, etc. as subpages.
           doxygen Doxyfile
+          
+          # Ensure .nojekyll exists in the output to prevent GitHub from ignoring files
+          touch gen/html/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -29,3 +38,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/gen/html
           publish_branch: gh-pages
+          force_orphan: true
