@@ -31,10 +31,28 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+# Google Benchmark
+FetchContent_Declare(
+  googlebenchmark
+  URL https://github.com/google/benchmark/archive/refs/tags/v1.8.3.tar.gz
+)
+set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googlebenchmark)
+
 # Subdirectories
 add_subdirectory(libs/tick_consumer)
 add_subdirectory(libs/state_estimator)
 add_subdirectory(libs/optimizer)
+
+# Header-only libraries (Interface)
+add_library(hardware_bridge INTERFACE)
+target_include_directories(hardware_bridge INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/libs/hardware_bridge)
+
+add_library(kernel_bypass INTERFACE)
+target_include_directories(kernel_bypass INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/libs/kernel_bypass)
+
+add_library(dma_engine INTERFACE)
+target_include_directories(dma_engine INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/libs/dma_engine)
 
 # Testing and Benchmarking
 enable_testing()
