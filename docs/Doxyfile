@@ -1,5 +1,5 @@
 PROJECT_NAME           = "HFT Signal Processing Stack"
-OUTPUT_DIRECTORY       = docs/gen
+OUTPUT_DIRECTORY       = gen
 GENERATE_LATEX         = NO
 GENERATE_HTML          = YES
 HAVE_DOT               = YES
@@ -7,13 +7,15 @@ EXTRACT_ALL            = YES
 RECURSIVE              = YES
 
 # Multi-Language Support
-INPUT                  = docs libs hardware/asm hardware/vhdl README.md technical_specification
+# Run from 'docs' dir, so paths are relative to 'docs'
+INPUT                  = . ../libs ../hardware/asm ../hardware/vhdl ../README.md ../technical_specification
+EXAMPLE_PATH           = ..
 FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.s *.asm *.md
 EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
 
 # Main Page and Layout
-USE_MDFILE_AS_MAINPAGE = docs/manual.md
-HTML_HEADER            = docs/header.html
+USE_MDFILE_AS_MAINPAGE = manual.md
+HTML_HEADER            = header.html
 
 # VHDL Specifics
 OPTIMIZE_OUTPUT_VHDL   = YES

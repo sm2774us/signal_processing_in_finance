@@ -19,7 +19,9 @@ jobs:
           sudo apt-get install -y doxygen graphviz
 
       - name: Generate Doxygen (C++, VHDL, ASM)
-        run: doxygen docs/Doxyfile
+        run: |
+          cd docs
+          doxygen Doxyfile
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
