@@ -1,0 +1,7 @@
+cc_library(
+    name = "optimizer",
+    hdrs = ["convex_optimizer.hpp"],
+    deps = ["@eigen//:eigen"],
+    visibility = ["//visibility:public"],
+    copts = ["-std=c++2b"],
+)

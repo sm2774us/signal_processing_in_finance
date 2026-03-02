@@ -1,0 +1,24 @@
+PROJECT_NAME           = "HFT Signal Processing Stack"
+OUTPUT_DIRECTORY       = docs/gen
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+HAVE_DOT               = YES
+EXTRACT_ALL            = YES
+RECURSIVE              = YES
+
+# Multi-Language Support
+INPUT                  = libs hardware/asm hardware/vhdl README.md
+FILE_PATTERNS          = *.hpp *.cpp *.h *.vhd *.vhd *.s *.asm
+EXTENSION_MAPPING      = vhd=vhdl s=C asm=C
+
+# VHDL Specifics
+OPTIMIZE_OUTPUT_VHDL   = YES
+
+# Modern UI (Doxygen Awesome)
+HTML_EXTRA_STYLESHEET  = https://raw.githubusercontent.com/jothepro/doxygen-awesome-css/main/doxygen-awesome.css
+GENERATE_TREEVIEW      = YES
+USE_MATHJAX            = YES
+
+# Source Browser
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES

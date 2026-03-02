@@ -1,0 +1,53 @@
+name: Production CI (C++/VHDL/ASM)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  full-stack-ci:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install C++26 & Hardware Tools
+      run: |
+        sudo apt-get update
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+          cmake \
+          clang-18 \
+          libeigen3-dev \
+          ghdl \
+          lcov
+
+    - name: 🧪 VHDL Logic Verification (100% Coverage)
+      run: |
+        chmod +x scripts/run_vhdl_tests.sh
+        ./scripts/run_vhdl_tests.sh
+
+    - name: 🔨 C++26 Stack Build with Coverage
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Debug \
+              -DCMAKE_CXX_COMPILER=clang++-18 \
+              -DCMAKE_C_COMPILER=clang-18 \
+              -DCMAKE_CXX_FLAGS="--coverage"
+        cmake --build build
+
+    - name: 🧪 C++/ASM Unit Verification
+      run: |
+        cd build
+        ctest --output-on-failure
+
+    - name: 📊 Performance Validation (Google Benchmark)
+      run: |
+        ./build/benchmarks/signal_benchmarks
+
+    - name: 📉 Coverage Reporting (LCOV)
+      run: |
+        lcov --capture --directory . --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' '*/tests/*' '*/_deps/*' --output-file coverage.info
+        lcov --list coverage.info
