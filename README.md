@@ -97,7 +97,7 @@ $$
 ### 4. 📈 Execution Layer (L3) - Convex Optimization
 - **Mean-Variance Optimizer:** Solves for optimal weights $w$ to maximize risk-adjusted predicted returns $\alpha$.
 $$
-\text{maximize } \alpha^T w - \frac{\lambda}{2} w^T \Sigma w
+\max_{w} \left( \alpha^T w - \frac{\lambda}{2} w^T \Sigma w \right)
 $$
 
 - **C++26 Safety:** Utilizes **Contracts** (`[[pre]]`, `[[post]]`) to enforce dimension and PD-matrix invariants at compile-time and runtime.
