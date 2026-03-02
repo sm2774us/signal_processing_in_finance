@@ -4,22 +4,23 @@ Welcome to the official technical documentation for the **HFT Signal Processing 
 
 ---
 
-## 📖 Table of Contents
+## 📖 Table of Contents (Book Chapters)
 
-1.  @subpage requirements "Chapter 1: Engineering Requirements & Specifications"
-2.  @subpage hardware_arch "Chapter 2: Hardware Layer (Silicon & ASM)"
-3.  @subpage networking "Chapter 3: Network Layer (Kernel-Bypass)"
-4.  @subpage signal_processing "Chapter 4: Signal Layer (State Estimation)"
-5.  @subpage optimization "Chapter 5: Execution Layer (Convex Optimization)"
-6.  @subpage verification "Chapter 6: Verification & Coverage Strategy"
+1.  @subpage introduction "Chapter 1: Introduction & Executive Overview"
+2.  @subpage getting_started "Chapter 2: Getting Started & Build Instructions"
+3.  @subpage requirements "Chapter 3: Engineering Requirements & Specifications"
+4.  @subpage hardware_arch "Chapter 4: Hardware Layer (Silicon & ASM)"
+5.  @subpage networking "Chapter 5: Network Layer (Kernel-Bypass)"
+6.  @subpage signal_processing "Chapter 6: Signal Layer (State Estimation)"
+7.  @subpage optimization "Chapter 7: Execution Layer (Convex Optimization)"
+8.  @subpage cpp26_features "Chapter 8: C++26 Modern Feature Deep-Dive"
+9.  @subpage verification "Chapter 9: Verification & Coverage Strategy"
+10. @subpage benchmarking "Chapter 10: Performance Benchmarking"
+11. @subpage citations "Chapter 11: Citations & Research"
 
 ---
 
-## 🚀 Executive Architecture Overview
-
-The solution features a co-designed hardware-software pipeline leveraging **C++26**, **Silicon-grade VHDL**, and **x86-64 MMIO Assembly**.
-
-### 🏗️ Architectural Data Flow
+## 🏗️ Architectural Data Flow
 
 ```mermaid
 graph TD
@@ -41,4 +42,4 @@ graph TD
 
 ---
 
-[Proceed to Chapter 1: Engineering Requirements >>](requirements.html)
+[Start Reading: Chapter 1: Introduction >>](introduction.html)

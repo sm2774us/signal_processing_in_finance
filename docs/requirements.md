@@ -1,6 +1,6 @@
-# Chapter 1: Engineering Requirements & Specifications {#requirements}
+# Chapter 3: Engineering Requirements & Specifications {#requirements}
 
-[<< Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)
+[<< Previous Chapter: Getting Started](getting_started.html) | [Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)
 
 ---
 
@@ -8,4 +8,4 @@
 
 ---
 
-[<< Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)
+[<< Previous Chapter: Getting Started](getting_started.html) | [Back to Table of Contents](index.html) | [Next Chapter: Hardware Layer >>](hardware_arch.html)

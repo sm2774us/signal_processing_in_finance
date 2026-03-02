@@ -1,6 +1,6 @@
-# Chapter 5: Execution Layer (Convex Optimization) {#optimization}
+# Chapter 7: Execution Layer (Convex Optimization) {#optimization}
 
-[<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: Verification >>](verification.html)
+[<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: C++26 Features >>](cpp26_features.html)
 
 ## Mean-Variance Optimizer (L3)
 The optimizer (`libs/optimizer/convex_optimizer.hpp`) solves for optimal portfolio weights.
@@ -16,4 +16,4 @@ The optimizer (`libs/optimizer/convex_optimizer.hpp`) solves for optimal portfol
 
 ---
 
-[<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: Verification >>](verification.html)
+[<< Previous Chapter: Signal Layer](signal_processing.html) | [Back to Table of Contents](index.html) | [Next Chapter: C++26 Features >>](cpp26_features.html)

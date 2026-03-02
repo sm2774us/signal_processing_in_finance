@@ -1,4 +1,4 @@
-# Chapter 2: Hardware Layer (Silicon & ASM) {#hardware_arch}
+# Chapter 4: Hardware Layer (Silicon & ASM) {#hardware_arch}
 
 [<< Previous Chapter: Requirements](requirements.html) | [Back to Table of Contents](index.html) | [Next Chapter: Network Layer >>](networking.html)
 

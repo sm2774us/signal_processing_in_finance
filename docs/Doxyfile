@@ -10,12 +10,17 @@ RECURSIVE              = YES
 # Multi-Language Support
 # Run from 'docs' dir. index.md is the entry point.
 INPUT                  = index.md \
+                         introduction.md \
+                         getting_started.md \
                          requirements.md \
                          hardware.md \
                          networking.md \
                          signals.md \
                          optimization.md \
+                         cpp26_features.md \
                          verification.md \
+                         benchmarking.md \
+                         citations.md \
                          ../libs \
                          ../hardware/asm \
                          ../hardware/vhdl \

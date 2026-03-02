@@ -1,4 +1,4 @@
-# Chapter 3: Network Layer (Kernel-Bypass) {#networking}
+# Chapter 5: Network Layer (Kernel-Bypass) {#networking}
 
 [<< Previous Chapter: Hardware Layer](hardware_arch.html) | [Back to Table of Contents](index.html) | [Next Chapter: Signal Layer >>](signal_processing.html)
 

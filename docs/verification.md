@@ -1,6 +1,6 @@
-# Chapter 6: Verification & Coverage Strategy {#verification}
+# Chapter 9: Verification & Coverage Strategy {#verification}
 
-[<< Previous Chapter: Execution Layer](optimization.html) | [Back to Table of Contents](index.html)
+[<< Previous Chapter: C++26 Features](cpp26_features.html) | [Back to Table of Contents](index.html) | [Next Chapter: Benchmarking >>](benchmarking.html)
 
 ## Quality Standards
 The HFT Signal Processing Stack is built with a "Verification First" mindset.
@@ -20,4 +20,4 @@ The HFT Signal Processing Stack is built with a "Verification First" mindset.
 
 ---
 
-[<< Previous Chapter: Execution Layer](optimization.html) | [Back to Table of Contents](index.html)
+[<< Previous Chapter: C++26 Features](cpp26_features.html) | [Back to Table of Contents](index.html) | [Next Chapter: Benchmarking >>](benchmarking.html)
