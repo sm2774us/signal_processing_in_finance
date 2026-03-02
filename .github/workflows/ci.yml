@@ -19,7 +19,7 @@ jobs:
         sudo apt-get update
         sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
           cmake \
-          clang-18 \
+          g++-14 \
           libeigen3-dev \
           ghdl \
           lcov
@@ -32,8 +32,8 @@ jobs:
     - name: 🔨 C++26 Stack Build with Coverage
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=Debug \
-              -DCMAKE_CXX_COMPILER=clang++-18 \
-              -DCMAKE_C_COMPILER=clang-18 \
+              -DCMAKE_CXX_COMPILER=g++-14 \
+              -DCMAKE_C_COMPILER=gcc-14 \
               -DCMAKE_CXX_FLAGS="--coverage"
         cmake --build build
 
