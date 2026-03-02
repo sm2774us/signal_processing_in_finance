@@ -71,14 +71,18 @@ This repository implements a **world-class, 100% production-grade HFT signal pro
 ### 3. 🧠 Signal Layer (L2) - State Estimation
 - **Kalman Filter:** Uses a numerically stable **Eigen::LDLT** decomposition to estimate the "Fair Value" of noisy signals.
 
-$$ \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1}) $$
+$$
+\hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k (z_k - H \hat{x}_{k|k-1})
+$$
 
 - **C++26 Integration:** State vectors are exposed via **`std::mdspan`** for standardized data views.
 
 ### 4. 📈 Execution Layer (L3) - Convex Optimization
 - **Mean-Variance Optimizer:** Solves for optimal weights $w$ to maximize risk-adjusted predicted returns $\alpha$.
 
-$$ \max_{w} \left( \alpha^T w - \frac{\lambda}{2} w^T \Sigma w \right) $$
+$$
+\max_{w} \left( \alpha^{T} w - \frac{\lambda}{2} w^{T} \Sigma w \right)
+$$
 
 - **C++26 Safety:** Utilizes **Contracts** (`[[pre]]`, `[[post]]`) to enforce dimension and PD-matrix invariants at compile-time and runtime.
 
@@ -107,9 +111,9 @@ graph TD
     subgraph Host_CPU_Layer
         C -->|Zero-Copy DMA| D[ef_vi Descriptor Ring]
         D -->|ASM MMIO Poll| E[TickConsumer]
-        E -->|pre-condition| F[Kalman Filter]
+        E -->|"pre-condition"| F[Kalman Filter]
         F -->|std_mdspan| G[Convex Optimizer]
-        G -->|post-condition| H[Order Entry]
+        G -->|"post-condition"| H[Order Entry]
     end
     style B fill:#f96,stroke:#333
     style D fill:#6cf,stroke:#333
