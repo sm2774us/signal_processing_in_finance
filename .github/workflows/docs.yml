@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -17,19 +17,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install Doxygen and Graphviz
+      - name: Install Documentation Tools
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      - name: Build Doxygen Manual
-        working-directory: docs
+      - name: Generate Professional Manual
+        # We run from the docs directory so Doxyfile relative paths work perfectly
         run: |
-          # The Doxyfile in this directory uses index.md as the main page
-          # and includes requirements.md, hardware.md, etc. as subpages.
+          cd docs
           doxygen Doxyfile
-          
-          # Ensure .nojekyll exists in the output to prevent GitHub from ignoring files
+          # Ensure GitHub doesn't try to process the output with Jekyll
           touch gen/html/.nojekyll
 
       - name: Deploy to GitHub Pages
@@ -39,3 +37,6 @@ jobs:
           publish_dir: ./docs/gen/html
           publish_branch: gh-pages
           force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: "Deploy professional book-like manual to GitHub Pages"
