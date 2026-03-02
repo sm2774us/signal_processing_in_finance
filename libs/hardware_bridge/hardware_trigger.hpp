@@ -1,12 +1,30 @@
 #pragma once
 
-#include <execution> // C++26 Sender/Receiver (P2300)
 #include <cstdint>
 #include <memory>
 #if __has_include(<debugging>)
 #include <debugging> // For std::breakpoint()
 #endif
 #include "hardware/asm/hardware_asm.hpp"
+
+// Mock for C++26 std::execution (P2300) if not available in standard library
+#if __has_include(<execution>)
+#include <execution>
+#endif
+
+#ifndef __cpp_lib_execution
+namespace hft::hardware::execution_mock {
+    struct dummy_sender {};
+    inline dummy_sender just() { return {}; }
+    template<typename F>
+    inline dummy_sender then(dummy_sender, F&&) { return {}; }
+    template<typename F>
+    inline dummy_sender operator|(dummy_sender s, F&& f) { return then(s, std::forward<F>(f)); }
+}
+namespace std::execution {
+    using namespace hft::hardware::execution_mock;
+}
+#endif
 
 /**
  * @file hardware_trigger.hpp
